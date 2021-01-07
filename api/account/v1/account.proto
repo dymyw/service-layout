@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = ".;account";
+
+package account;
+
+message SignInRequest {
+  string name = 1;
+}
+
+message SignInReply {
+  bool result = 1;
+}
+
+service AccountService {
+  rpc SignIn(SignInRequest) returns (SignInReply) {}
+}

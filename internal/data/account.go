@@ -14,6 +14,8 @@ func NewAccountRepo() biz.AccountRepo {
 type accountRepo struct {}
 
 // SaveAccount
-func (ar *accountRepo) SaveAccount(a *biz.Account) {
+func (ar *accountRepo) SaveAccount(a *biz.Account) bool {
 	fmt.Println(a)
+
+	return true
 }
