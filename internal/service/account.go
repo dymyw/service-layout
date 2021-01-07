@@ -15,7 +15,7 @@ type AccountServer struct {
 }
 
 func (as *AccountServer) SignIn(ctx context.Context, in *pb.SignInRequest) (*pb.SignInReply, error) {
-	log.Printf("Received: %v", in.GetName())
+	log.Printf("AccountServer Received: %v", in.GetName())
 
 	// DTO -> DO
 	account := new(biz.Account)

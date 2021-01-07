@@ -12,7 +12,7 @@ type HelloServer struct {
 }
 
 func (hs *HelloServer) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	log.Printf("Received: %v", in.GetName())
+	log.Printf("HelloServer Received: %v", in.GetName())
 
 	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
 }

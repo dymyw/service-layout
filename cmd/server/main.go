@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github.com/dymyw/service-layout/api/account/v1"
 	"log"
 	"net"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 
+	"github.com/dymyw/service-layout/api/account/v1"
 	"github.com/dymyw/service-layout/api/hello/v1"
 	"github.com/dymyw/service-layout/internal/service"
 )
@@ -22,6 +23,9 @@ func main() {
 	s := grpc.NewServer()
 	hello.RegisterGreeterServer(s, &service.HelloServer{})
 	account.RegisterAccountServiceServer(s, &service.AccountServer{})
+
+	// for test
+	reflection.Register(s)
 
 	if err := s.Serve(listen); err != nil {
 		log.Fatalf("failed to serve: %v", err)
