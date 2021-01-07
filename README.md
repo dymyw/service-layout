@@ -1,14 +1,14 @@
 ## Service Application Project Layout
 
-Touch `go.mod` file:
+### Touch `go.mod` file:
 
 `go mod init github.com/dymyw/service-layout`
 
-Get dependent:
+### Get dependent:
 
 `go get -u xxx/xxx`
 
-Compile `*.proto` file:
+### Compile `*.proto` file:
 
 ```sh
 protoc --proto_path=. \
@@ -16,7 +16,7 @@ protoc --proto_path=. \
        api/account/v1/account.proto
 ```
 
-Test gRPC api:
+### Test gRPC api:
 
 ```
 // install grpcui
@@ -29,3 +29,7 @@ reflection.Register(s)
 // run
 grpcui -plaintext 127.0.0.1:50001
 ```
+
+### Build command:
+
+`go build -o cmd/server/server cmd/server/main.go`
