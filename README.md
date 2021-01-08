@@ -11,8 +11,8 @@
 ### Compile `*.proto` file
 
 ```sh
-protoc --proto_path=. \
-       --go_out=plugins=grpc:api/account/v1 \
+protoc --go_out=api/account/v1 \
+       --go-grpc_out=api/account/v1 \
        api/account/v1/account.proto
 ```
 
