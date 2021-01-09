@@ -19,3 +19,8 @@ func (ar *accountRepo) SaveAccount(a *biz.Account) bool {
 
 	return true
 }
+
+// GetInfo
+func (ar *accountRepo) GetInfo(id string) biz.Account {
+	return biz.Account{Name: "mayongwei"}
+}

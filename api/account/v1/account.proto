@@ -12,6 +12,16 @@ message SignInReply {
   bool result = 1;
 }
 
+message GetAccountRequest {
+  // todo id 用什么类型的字段好呢？
+  string id = 1;
+}
+
+message GetAccountReply {
+  string name = 1;
+}
+
 service AccountService {
   rpc SignIn(SignInRequest) returns (SignInReply) {}
+  rpc GetAccount(GetAccountRequest) returns (GetAccountReply) {}
 }

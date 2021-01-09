@@ -15,11 +15,13 @@ type AccountServer struct {
 }
 
 func (as *AccountServer) SignIn(ctx context.Context, in *pb.SignInRequest) (*pb.SignInReply, error) {
-	log.Printf("AccountServer Received: %v", in.GetName())
+	log.Printf("AccountServer SignIn Received: %v", in.GetName())
+
+	name := in.GetName()
 
 	// DTO -> DO
 	account := new(biz.Account)
-	account.Name = in.GetName()
+	account.Name = name
 
 	// repo
 	accountRepo := data.NewAccountRepo()
@@ -29,4 +31,19 @@ func (as *AccountServer) SignIn(ctx context.Context, in *pb.SignInRequest) (*pb.
 	result := accountUserCase.SaveAccount(account)
 
 	return &pb.SignInReply{Result: result}, nil
+}
+
+func (as *AccountServer) GetAccount(ctx context.Context, in *pb.GetAccountRequest) (*pb.GetAccountReply, error) {
+	log.Printf("AccountServer GetAccount Received: %v", in.GetId())
+
+	id := in.GetId()
+
+	// repo
+	accountRepo := data.NewAccountRepo()
+	// user case
+	accountUserCase := biz.NewAccountUserCase(accountRepo)
+	// account
+	account := accountUserCase.GetInfo(id)
+
+	return &pb.GetAccountReply{Name: account.Name}, nil
 }
