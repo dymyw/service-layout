@@ -23,8 +23,11 @@ func (as *AccountServer) SignIn(ctx context.Context, in *pb.SignInRequest) (*pb.
 	account := new(biz.Account)
 	account.Name = name
 
+	// db
+	db, _, _ := data.NewDB()
+
 	// repo
-	accountRepo := data.NewAccountRepo()
+	accountRepo := data.NewAccountRepo(db)
 	// user case
 	accountUserCase := biz.NewAccountUserCase(accountRepo)
 	// save
@@ -38,8 +41,11 @@ func (as *AccountServer) GetAccount(ctx context.Context, in *pb.GetAccountReques
 
 	id := in.GetId()
 
+	// db
+	db, _, _ := data.NewDB()
+
 	// repo
-	accountRepo := data.NewAccountRepo()
+	accountRepo := data.NewAccountRepo(db)
 	// user case
 	accountUserCase := biz.NewAccountUserCase(accountRepo)
 	// account
