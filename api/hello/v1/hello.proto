@@ -1,8 +1,11 @@
 syntax = "proto3";
 
-option go_package = ".;hello";
-
 package hello;
+
+// todo http ali 怎么实现？
+//import "google/api/annotations.proto";
+
+option go_package = ".;hello";
 
 message HelloRequest {
   string name = 1;
@@ -13,5 +16,9 @@ message HelloReply {
 }
 
 service Greeter {
-  rpc SayHello(HelloRequest) returns (HelloReply) {}
+  rpc SayHello(HelloRequest) returns (HelloReply) {
+    //option (google.api.http) = {
+    //  get: "/hello"
+    //};
+  }
 }
