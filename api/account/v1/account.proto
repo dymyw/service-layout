@@ -1,8 +1,13 @@
 syntax = "proto3";
 
+package account;
+
 option go_package = "api/account/v1;account";
 
-package account;
+service AccountService {
+  rpc SignIn(SignInRequest) returns (SignInReply) {}
+  rpc GetAccount(GetAccountRequest) returns (GetAccountReply) {}
+}
 
 message SignInRequest {
   string name = 1;
@@ -19,9 +24,4 @@ message GetAccountRequest {
 
 message GetAccountReply {
   string name = 1;
-}
-
-service AccountService {
-  rpc SignIn(SignInRequest) returns (SignInReply) {}
-  rpc GetAccount(GetAccountRequest) returns (GetAccountReply) {}
 }
