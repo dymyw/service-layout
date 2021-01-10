@@ -6,8 +6,19 @@ import (
 	"github.com/dymyw/service-layout/internal/biz"
 )
 
+var _ biz.AccountRepo = &accountRepo{}
+//var _ biz.AccountRepo = new(accountRepo)
+//var _ biz.AccountRepo = (*accountRepo)(nil)
+
+// todo wire error
+//var AccountRepoSet = wire.NewSet(
+//	NewAccountRepo,
+//	// bind interface and struct
+//	wire.Bind(new(biz.AccountRepo), new(*accountRepo)),
+//)
+
 // NewAccountRepo
-func NewAccountRepo(db *sql.DB) biz.AccountRepo {
+func NewAccountRepo(db *sql.DB) *accountRepo {
 	return &accountRepo{db: db}
 }
 
