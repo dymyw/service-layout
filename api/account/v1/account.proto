@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = ".;account";
+option go_package = "api/account/v1;account";
 
 package account;
 

@@ -10,15 +10,7 @@
 
 ### Compile `*.proto` file
 
-```sh
-protoc --go_out=api/hello/v1 \
-       --go-grpc_out=api/hello/v1 \
-       api/hello/v1/hello.proto
-
-protoc --go_out=api/account/v1 \
-       --go-grpc_out=api/account/v1 \
-       api/account/v1/account.proto
-```
+`make proto`
 
 ### Test gRPC api
 

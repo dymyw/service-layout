@@ -5,7 +5,7 @@ package hello;
 // todo http ali 怎么实现？
 //import "google/api/annotations.proto";
 
-option go_package = ".;hello";
+option go_package = "api/hello/v1;hello";
 
 message HelloRequest {
   string name = 1;
