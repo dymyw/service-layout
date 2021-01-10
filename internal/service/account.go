@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 	"log"
 
 	"github.com/dymyw/service-layout/internal/biz"
@@ -9,6 +10,8 @@ import (
 
 	pb "github.com/dymyw/service-layout/api/account/v1"
 )
+
+var UserNotFound = errors.New("user not found")
 
 type AccountServer struct {
 	pb.UnimplementedAccountServiceServer
@@ -49,7 +52,12 @@ func (as *AccountServer) GetAccount(ctx context.Context, in *pb.GetAccountReques
 	// user case
 	accountUserCase := biz.NewAccountUserCase(accountRepo)
 	// account
-	account := accountUserCase.GetInfo(id)
+	account, err := accountUserCase.GetInfo(id)
+	if err != nil {
+		if errors.Is(err, biz.NotFound) {
+			return nil, UserNotFound
+		}
+	}
 
 	return &pb.GetAccountReply{Name: account.Name}, nil
 }

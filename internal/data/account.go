@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/dymyw/service-layout/internal/biz"
+	"github.com/pkg/errors"
 )
 
 var _ biz.AccountRepo = &accountRepo{}
@@ -35,12 +36,12 @@ func (ar *accountRepo) SaveAccount(a *biz.Account) bool {
 }
 
 // GetInfo
-func (ar *accountRepo) GetInfo(id string) biz.Account {
+func (ar *accountRepo) GetInfo(id string) (*biz.Account, error) {
 	var mobile string
 	err := ar.db.QueryRow("SELECT mobile FROM t_user where id = ?", id).Scan(&mobile)
 	if err != nil {
-		panic(err)
+		return nil, errors.Wrapf(biz.NotFound, "sql error: %v", err)
 	}
 
-	return biz.Account{Name: mobile}
+	return &biz.Account{Name: mobile}, nil
 }

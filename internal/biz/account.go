@@ -17,7 +17,7 @@ type Address struct {
 // AccountRepo
 type AccountRepo interface {
 	SaveAccount(*Account) bool
-	GetInfo(string) Account
+	GetInfo(string) (*Account, error)
 }
 
 // NewAccountUserCase
@@ -36,6 +36,6 @@ func (uc *AccountUserCase) SaveAccount(a *Account) bool {
 }
 
 // GetInfo
-func (uc *AccountUserCase) GetInfo(id string) Account {
+func (uc *AccountUserCase) GetInfo(id string) (*Account, error) {
 	return uc.repo.GetInfo(id)
 }
