@@ -1,5 +1,9 @@
 package biz
 
+import "errors"
+
+var UserNotFound = errors.New("user not found")
+
 // Account
 type Account struct {
 	Id int
@@ -37,5 +41,12 @@ func (uc *AccountUserCase) SaveAccount(a *Account) bool {
 
 // GetInfo
 func (uc *AccountUserCase) GetInfo(id string) (*Account, error) {
-	return uc.repo.GetInfo(id)
+	account, err := uc.repo.GetInfo(id)
+	if err != nil {
+		if errors.Is(err, NotFound) {
+			return nil, UserNotFound
+		}
+	}
+
+	return account, nil
 }
