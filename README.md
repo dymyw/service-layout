@@ -28,7 +28,7 @@ grpcui -plaintext 127.0.0.1:50001
 
 ### Build command
 
-`go build -o cmd/server/server cmd/server/main.go`
+`make build`
 
 ### TODO list
 
