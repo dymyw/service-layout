@@ -21,8 +21,8 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	hello.RegisterGreeterServer(s, &service.HelloServer{})
-	account.RegisterAccountServiceServer(s, &service.AccountServer{})
+	hello.RegisterGreeterServer(s, &service.GreeterService{})
+	account.RegisterAccountServer(s, &service.AccountService{})
 
 	// for test
 	reflection.Register(s)

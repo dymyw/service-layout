@@ -10,12 +10,12 @@ import (
 	pb "github.com/dymyw/service-layout/api/account/v1"
 )
 
-type AccountServer struct {
-	pb.UnimplementedAccountServiceServer
+type AccountService struct {
+	pb.UnimplementedAccountServer
 }
 
-func (as *AccountServer) SignIn(ctx context.Context, in *pb.SignInRequest) (*pb.SignInReply, error) {
-	log.Printf("AccountServer SignIn Received: %v", in.GetName())
+func (as *AccountService) SignIn(ctx context.Context, in *pb.SignInRequest) (*pb.SignInReply, error) {
+	log.Printf("AccountService SignIn Received: %v", in.GetName())
 
 	name := in.GetName()
 
@@ -36,8 +36,8 @@ func (as *AccountServer) SignIn(ctx context.Context, in *pb.SignInRequest) (*pb.
 	return &pb.SignInReply{Result: result}, nil
 }
 
-func (as *AccountServer) GetAccount(ctx context.Context, in *pb.GetAccountRequest) (*pb.GetAccountReply, error) {
-	log.Printf("AccountServer GetAccount Received: %v", in.GetId())
+func (as *AccountService) GetAccount(ctx context.Context, in *pb.GetAccountRequest) (*pb.GetAccountReply, error) {
+	log.Printf("AccountService GetAccount Received: %v", in.GetId())
 
 	id := in.GetId()
 

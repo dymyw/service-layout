@@ -13,119 +13,119 @@ import (
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion7
 
-// AccountServiceClient is the client API for AccountService service.
+// AccountClient is the client API for Account service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AccountServiceClient interface {
+type AccountClient interface {
 	SignIn(ctx context.Context, in *SignInRequest, opts ...grpc.CallOption) (*SignInReply, error)
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountReply, error)
 }
 
-type accountServiceClient struct {
+type accountClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewAccountServiceClient(cc grpc.ClientConnInterface) AccountServiceClient {
-	return &accountServiceClient{cc}
+func NewAccountClient(cc grpc.ClientConnInterface) AccountClient {
+	return &accountClient{cc}
 }
 
-func (c *accountServiceClient) SignIn(ctx context.Context, in *SignInRequest, opts ...grpc.CallOption) (*SignInReply, error) {
+func (c *accountClient) SignIn(ctx context.Context, in *SignInRequest, opts ...grpc.CallOption) (*SignInReply, error) {
 	out := new(SignInReply)
-	err := c.cc.Invoke(ctx, "/account.AccountService/SignIn", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/account.Account/SignIn", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountReply, error) {
+func (c *accountClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountReply, error) {
 	out := new(GetAccountReply)
-	err := c.cc.Invoke(ctx, "/account.AccountService/GetAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/account.Account/GetAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AccountServiceServer is the server API for AccountService service.
-// All implementations must embed UnimplementedAccountServiceServer
+// AccountServer is the server API for Account service.
+// All implementations must embed UnimplementedAccountServer
 // for forward compatibility
-type AccountServiceServer interface {
+type AccountServer interface {
 	SignIn(context.Context, *SignInRequest) (*SignInReply, error)
 	GetAccount(context.Context, *GetAccountRequest) (*GetAccountReply, error)
-	mustEmbedUnimplementedAccountServiceServer()
+	mustEmbedUnimplementedAccountServer()
 }
 
-// UnimplementedAccountServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedAccountServiceServer struct {
+// UnimplementedAccountServer must be embedded to have forward compatible implementations.
+type UnimplementedAccountServer struct {
 }
 
-func (UnimplementedAccountServiceServer) SignIn(context.Context, *SignInRequest) (*SignInReply, error) {
+func (UnimplementedAccountServer) SignIn(context.Context, *SignInRequest) (*SignInReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SignIn not implemented")
 }
-func (UnimplementedAccountServiceServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountReply, error) {
+func (UnimplementedAccountServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
 }
-func (UnimplementedAccountServiceServer) mustEmbedUnimplementedAccountServiceServer() {}
+func (UnimplementedAccountServer) mustEmbedUnimplementedAccountServer() {}
 
-// UnsafeAccountServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AccountServiceServer will
+// UnsafeAccountServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AccountServer will
 // result in compilation errors.
-type UnsafeAccountServiceServer interface {
-	mustEmbedUnimplementedAccountServiceServer()
+type UnsafeAccountServer interface {
+	mustEmbedUnimplementedAccountServer()
 }
 
-func RegisterAccountServiceServer(s grpc.ServiceRegistrar, srv AccountServiceServer) {
-	s.RegisterService(&_AccountService_serviceDesc, srv)
+func RegisterAccountServer(s grpc.ServiceRegistrar, srv AccountServer) {
+	s.RegisterService(&_Account_serviceDesc, srv)
 }
 
-func _AccountService_SignIn_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Account_SignIn_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SignInRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).SignIn(ctx, in)
+		return srv.(AccountServer).SignIn(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/account.AccountService/SignIn",
+		FullMethod: "/account.Account/SignIn",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).SignIn(ctx, req.(*SignInRequest))
+		return srv.(AccountServer).SignIn(ctx, req.(*SignInRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Account_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).GetAccount(ctx, in)
+		return srv.(AccountServer).GetAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/account.AccountService/GetAccount",
+		FullMethod: "/account.Account/GetAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).GetAccount(ctx, req.(*GetAccountRequest))
+		return srv.(AccountServer).GetAccount(ctx, req.(*GetAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _AccountService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "account.AccountService",
-	HandlerType: (*AccountServiceServer)(nil),
+var _Account_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "account.Account",
+	HandlerType: (*AccountServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "SignIn",
-			Handler:    _AccountService_SignIn_Handler,
+			Handler:    _Account_SignIn_Handler,
 		},
 		{
 			MethodName: "GetAccount",
-			Handler:    _AccountService_GetAccount_Handler,
+			Handler:    _Account_GetAccount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

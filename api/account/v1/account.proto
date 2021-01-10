@@ -4,7 +4,7 @@ package account;
 
 option go_package = "api/account/v1;account";
 
-service AccountService {
+service Account {
   rpc SignIn(SignInRequest) returns (SignInReply) {}
   rpc GetAccount(GetAccountRequest) returns (GetAccountReply) {}
 }

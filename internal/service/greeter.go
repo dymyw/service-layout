@@ -7,12 +7,12 @@ import (
 	pb "github.com/dymyw/service-layout/api/hello/v1"
 )
 
-type HelloServer struct {
+type GreeterService struct {
 	pb.UnimplementedGreeterServer
 }
 
-func (hs *HelloServer) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	log.Printf("HelloServer Received: %v", in.GetName())
+func (hs *GreeterService) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	log.Printf("GreeterService Received: %v", in.GetName())
 
 	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
 }
