@@ -33,9 +33,15 @@ grpcui -plaintext 127.0.0.1:50001
 ### TODO list
 
 - [ ] api error transfer
+  - grpc、metadata
 - [ ] update some fields
+  - FieldMask
 - [ ] config design
+  - yaml
 - [ ] source init
 - [ ] package management
+  - wire
 - [ ] docker test
+  - docker compose
 - [ ] handle http request
+    - kratos
