@@ -12,20 +12,6 @@
 
 `make proto`
 
-### Test gRPC api
-
-```
-// install grpcui
-go get github.com/fullstorydev/grpcui
-go install github.com/fullstorydev/grpcui/cmd/grpcui
-
-// modify main.go
-reflection.Register(s)
-
-// run
-grpcui -plaintext 127.0.0.1:50001
-```
-
 ### Build command
 
 `make build`
